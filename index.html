@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ontdek zorgtechnologie bij Vereen: exoskelet, HUME sok, Vendlet bed, slimme toiletbril en meer innovaties voor de zorg.">
+<title>Zorgtechnologie bij Vereen</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --lichtblauw: #AAE0FA;
+  --violet: #AFB4DA;
+  --groen: #D4E05A;
+  --mint: #B6D8CD;
+  --roze: #E9BCD3;
+  --paars: #55217F;
+  --donkerblauw: #4363AB;
+  --wit: #ffffff;
+  --grijs: #4a4a4a;
+  --lichtgrijs: #f5f3f8;
+  --schaduw: 0 12px 40px rgba(85, 33, 127, 0.15);
+  --radius: 20px;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--lichtgrijs);
+  color: var(--grijs);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* ── Home button ── */
+.home-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: var(--paars);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--schaduw);
+  transition: transform var(--transition), background var(--transition), opacity var(--transition);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.home-btn.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.home-btn:hover,
+.home-btn:focus-visible {
+  background: var(--donkerblauw);
+  transform: scale(1.08);
+  outline: none;
+}
+
+.home-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+/* ── Home section ── */
+#home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--lichtgrijs);
+}
+
+.hero {
+  padding: 60px 40px 40px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--lichtblauw) 0%, var(--violet) 45%, var(--roze) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(212, 224, 90, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(182, 216, 205, 0.4) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--paars);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--paars);
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: rgba(85, 33, 127, 0.75);
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* ── Card grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 40px;
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.card {
+  height: 260px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform var(--transition), box-shadow var(--transition);
+  border: none;
+  background: linear-gradient(135deg, var(--paars), var(--donkerblauw));
+  padding: 0;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: var(--schaduw);
+  outline: none;
+}
+
+.card:active {
+  transform: translateY(-2px);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.card:hover img,
+.card:focus-visible img {
+  transform: scale(1.05);
+}
+
+.card img.img-error {
+  display: none;
+}
+
+.card-placeholder {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  opacity: 0.3;
+}
+
+.card img.img-error ~ .card-placeholder {
+  display: flex;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(85, 33, 127, 0.92) 0%, rgba(85, 33, 127, 0.2) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.card-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px;
+  color: white;
+  font-size: 1.35rem;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.card-number {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--paars);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  z-index: 2;
+}
+
+/* ── Detail sections ── */
+.section {
+  display: none;
+  min-height: 100vh;
+  padding: 40px 120px 60px;
+  background: var(--wit);
+  animation: fadeIn 0.4s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 3px solid var(--groen);
+}
+
+.section h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--paars);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-style: italic;
+  color: #777;
+  font-weight: 400;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.media {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.media-frame {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--mint), var(--lichtblauw));
+  border-radius: var(--radius);
+  box-shadow: var(--schaduw);
+  padding: 16px;
+}
+
+.media-frame img {
+  width: 100%;
+  height: auto;
+  max-height: min(40vh, 448px);
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.media-frame img.img-error {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  object-fit: none;
+  background: linear-gradient(135deg, var(--violet), var(--roze));
+  border-radius: 12px;
+}
+
+iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  background: #111;
+}
+
+.text {
+  font-size: 1.15rem;
+  line-height: 1.85;
+  color: var(--grijs);
+}
+
+.text p {
+  margin-bottom: 1.1em;
+}
+
+.text p:last-child {
+  margin-bottom: 0;
+}
+
+.section-counter {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #999;
+  font-weight: 500;
+}
+
+.section-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.dot.active {
+  background: var(--paars);
+  transform: scale(1.3);
+}
+
+.dot:hover,
+.dot:focus-visible {
+  background: var(--donkerblauw);
+  outline: none;
+}
+
+/* ── Navigation arrows ── */
+.nav-arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  border: none;
+  background: var(--paars);
+  color: white;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 999;
+  cursor: pointer;
+  box-shadow: var(--schaduw);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.nav-arrow:hover,
+.nav-arrow:focus-visible {
+  background: var(--donkerblauw);
+  transform: translateY(-50%) scale(1.08);
+  outline: none;
+}
+
+.nav-arrow.left { left: 24px; }
+.nav-arrow.right { right: 24px; }
+
+/* ── Footer hint on home ── */
+.home-hint {
+  text-align: center;
+  padding: 20px 40px 32px;
+  color: #999;
+  font-size: 0.95rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 32px 90px 48px;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid {
+    padding: 24px 20px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    height: 200px;
+  }
+
+  .section {
+    padding: 24px 20px 40px;
+  }
+
+  .nav-arrow {
+    width: 52px;
+    height: 52px;
+    font-size: 1.4rem;
+  }
+
+  .nav-arrow.left { left: 12px; }
+  .nav-arrow.right { right: 12px; }
+
+  .home-btn {
+    width: 52px;
+    height: 52px;
+    top: 16px;
+    right: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<button class="home-btn" id="homeBtn" onclick="showHome()" aria-label="Terug naar overzicht">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+</button>
+
+<section id="home" aria-label="Overzicht zorgtechnologie">
+
+  <div class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Vereen Innovaties</span>
+      <h1>Zorgtechnologie bij Vereen</h1>
+      <p>Ontdek innovatieve oplossingen die zorgmedewerkers ondersteunen en de kwaliteit van zorg verbeteren.</p>
+    </div>
+  </div>
+
+  <div class="grid" id="cardGrid" role="list"></div>
+
+  <p class="home-hint">Tik op een thema om meer te ontdekken</p>
+
+</section>
+
+<div id="sections" aria-live="polite"></div>
+
+<script>
+
+const items = [
+  {
+    title: "Exoskelet",
+    subtitle: "Verminderen van fysieke belasting",
+    image: "images/exoskelet.jpg",
+    icon: "🦾",
+    video: "https://www.youtube-nocookie.com/embed/ambHz9EznXw",
+    paragraphs: [
+      "Een exoskelet kan zorgmedewerkers helpen bij fysiek zwaar werk, zoals tillen en ondersteunen van cliënten. Het apparaat ondersteunt het lichaam en vermindert de belasting van rug, schouders en knieën. Dat kan helpen om klachten te voorkomen en het werk prettiger en langer vol te houden.",
+      "Bij Vereen werken we op dit moment nog niet met een exoskelet. Wel kijken we met interesse naar deze ontwikkeling en wat het kan betekenen voor de zorg. In het filmpje zie je dat zorginstelling Sevagram een pilot doet met een exoskelet. Tijdens deze pilot onderzoeken zij hoe het exoskelet in de praktijk werkt en hoe medewerkers de ondersteuning ervaren tijdens hun dagelijkse werkzaamheden."
+    ]
+  },
+  {
+    title: "HUME",
+    subtitle: "Slimme sok die stressniveau meet",
+    image: "images/Hume.jpg",
+    icon: "🧦",
+    video: "https://www.youtube-nocookie.com/embed/q4m5Dw85XBk",
+    paragraphs: [
+      "HUME kan zorgmedewerkers helpen om beter inzicht te krijgen in het welzijn en de beweging van cliënten. De Hume is een innovatieve, slimme sok die stressniveaus van mensen meet, vertaalt en weergeeft. De sok meet een combinatie van beweging, hartslag en zweetproductie. Deze data worden vertaald naar een overzichtelijke app. De app stuurt vervolgens een waarschuwing aan de zorg zodra opbouwende stress wordt gemeten. Dit 'Early-Warning systeem' zorgt ervoor dat cliënten eerder geholpen kunnen worden.",
+      "Bij Vereen werken we op dit moment nog niet met de HUME sok. Wel volgen we deze ontwikkeling met interesse en kijken we naar wat het kan betekenen voor de zorg. Bekijk het filmpje voor meer informatie over de HUME Sok!"
+    ]
+  },
+  {
+    title: "Vendlet Bed",
+    subtitle: "Makkelijker cliënten draaien in bed",
+    image: "images/Vendlet.jpg",
+    icon: "🛏️",
+    video: "https://www.youtube-nocookie.com/embed/MoOVYIVfsOI",
+    paragraphs: [
+      "Een Vendlet bed kan zorgmedewerkers ondersteunen bij het verplaatsen en draaien van cliënten in bed. Het systeem helpt om cliënten op een veilige en comfortabele manier te positioneren, waardoor de fysieke belasting voor zorgmedewerkers vermindert. Dit kan helpen om klachten aan rug en schouders te voorkomen en maakt het werk minder zwaar, terwijl cliënten meer comfort en zelfstandigheid kunnen ervaren.",
+      "Bij Vereen werken al enkele locaties met Vendlet bedden. Het innovatieteam voerde een pilot uit bij het Zonnehuis en de Kivietsbloem. Daaruit blijkt dat het Vendlet bed effectief is bij het omdraaien van cliënten die vanwege hun gewicht of lichamelijke beperkingen normaal gesproken lastig om te draaien zijn. In het filmpje zie je hoe het Vendlet bed werkt.",
+      "Ken jij een cliënt die mogelijk baat heeft bij een Vendlet bed? Bespreek dit dan eerst met de ergotherapeut!"
+    ]
+  },
+  {
+    title: "Slimme Toiletbril",
+    subtitle: "Toiletbril die gezondheidsmetingen uitvoert",
+    image: "images/slimme-WC-bril.jpg",
+    icon: "🚽",
+    video: "https://www.youtube-nocookie.com/embed/QL6q-ff9gqE",
+    paragraphs: [
+      "Een slimme toiletbril van OnePlanet kan zorgmedewerkers ondersteunen door automatisch gezondheidsgegevens van cliënten te meten tijdens het toiletbezoek. Denk hierbij aan waarden zoals hartslag, temperatuur en andere signalen die iets zeggen over de gezondheid. Dit kan helpen om veranderingen vroegtijdig te signaleren, waardoor sneller passende zorg ingezet kan worden en problemen mogelijk worden voorkomen.",
+      "Op dit moment is de slimme toiletbril nog in ontwikkeling en daardoor nog niet beschikbaar om in te zetten bij Vereen. Wel volgen we deze ontwikkeling met interesse en onderzoeken we mogelijkheden om de toiletbril op een van onze locaties te testen. In het filmpje zie je hoe de Slimme Toiletbril de Klokhuis Wetenschapsprijs wint en vertellen de onderzoekers over hoe de uitvinding werkt."
+    ]
+  },
+  {
+    title: "Attendi App",
+    subtitle: "Gesprekken direct omgezet naar rapportages",
+    image: "images/attendi.jpg",
+    icon: "📱",
+    video: "https://www.youtube-nocookie.com/embed/Rl8ZAp67KDA",
+    paragraphs: [
+      "De Attendi App maakt automatisch samenvattingen van ieder zorggesprek. Zo besparen zorgprofessionals tijd, geven ze hun volle aandacht aan de cliënt en ontstaat een rijker cliëntdossier. Nadat het gesprek door Attendi is verwerkt in het gewenste template, kunnen zorgmedewerkers de tekst nog aanpassen en aanvullen waar nodig. Daarna wordt de rapportage direct toegevoegd aan het ECD.",
+      "Op dit moment wordt de Attendi app door de behandelaren van Vereen getest. Wanneer deze pilot succesvol is, gaat het innovatieteam onderzoeken of de Attendi app ook ingezet kan worden tijdens andere momenten zoals zorgrondes of intakegesprekken. In het filmpje vertellen buurtzorgmedewerkers over hun ervaringen met de app en hoe de app werkt."
+    ]
+  },
+  {
+    title: "Ontvangstrobot",
+    subtitle: "Robot die bezoekers ontvangt en wegwijs maakt",
+    image: "images/ontvangstrobot.jpg",
+    icon: "🤖",
+    video: "https://www.youtube-nocookie.com/embed/yZ1AdaTWoNk",
+    paragraphs: [
+      "Deze robot van Zorabots kan zorgmedewerkers ondersteunen als ontvangstrobot op zorglocaties. De robot kan bezoekers welkom heten, informatie geven en de weg wijzen binnen de locatie. Dit kan helpen om de werkdruk bij de zorgmedewerkers te verlagen en zorgt voor een gastvrije ontvangst voor bezoekers en cliënten.",
+      "Bij Vereen wordt de robot vanaf juli getest bij de Kievitsbloem en het Centraal Bureau. Tijdens deze pilot onderzoeken we hoe de robot in de praktijk werkt en hoe cliënten, bezoekers en medewerkers de inzet ervaren in hun dagelijkse omgeving.",
+      "In het filmpje zie je hoe de robot al wordt ingezet in een glasbedrijf om bezoekers te ontvangen."
+    ]
+  },
+  {
+    title: "Robot Schrob/Zuigmachine",
+    subtitle: "Vloeren efficiënter gereinigd met robot",
+    image: "images/schrobzuigmachine.jpg",
+    icon: "🧹",
+    video: "",
+    paragraphs: [
+      "Deze robot schrob/zuigmachine kan schoonmaakmedewerkers ondersteunen bij het schoonmaken van vloeren. De machine reinigt zelfstandig en zorgt voor een constante en efficiënte hygiëne in de gangen van zorglocaties. Dit kan helpen om tijd te besparen, de werkdruk te verlagen en bij te dragen aan een schone leefomgeving voor cliënten en medewerkers.",
+      "Bij Vereen is de robot schrob/zuigmachine twee weken lang getest bij de Havezate. Uit deze pilot bleek dat de machine bijdraagt aan schonere wandelgangen, maar dat hij in volle ruimtes zoals het restaurant niet altijd overal goed bij kan. We gaan binnenkort verder met een langere pilot van een jaar om te bepalen of we de machine bij heel Vereen willen gaan inzetten."
+    ]
+  }
+];
+
+let current = 0;
+let isDetailView = false;
+
+const homeBtn = document.getElementById("homeBtn");
+const cardGrid = document.getElementById("cardGrid");
+const container = document.getElementById("sections");
+
+function handleImgError(img) {
+  img.classList.add("img-error");
+  img.removeAttribute("src");
+}
+
+/* ── Build home cards ── */
+items.forEach((item, index) => {
+  cardGrid.innerHTML += `
+    <button class="card" onclick="openSection(${index})" role="listitem" aria-label="${item.title}: ${item.subtitle}">
+      <img src="${item.image}" alt="${item.title}" loading="lazy" onerror="handleImgError(this)">
+      <div class="card-placeholder" aria-hidden="true">${item.icon}</div>
+      <div class="card-overlay"></div>
+      <span class="card-number">${index + 1}</span>
+      <span class="card-title">${item.title}</span>
+    </button>
+  `;
+});
+
+/* ── Build detail sections ── */
+items.forEach((item, index) => {
+  const videoHtml = item.video
+    ? `<iframe src="${item.video}" title="Video over ${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`
+    : "";
+
+  container.innerHTML += `
+    <section class="section" id="section-${index}" aria-label="${item.title}">
+      <button class="nav-arrow left" onclick="prevSection()" aria-label="Vorige thema">&#10094;</button>
+      <button class="nav-arrow right" onclick="nextSection()" aria-label="Volgende thema">&#10095;</button>
+
+      <div class="section-header">
+        <h2>${item.title}</h2>
+        <p class="subtitle">${item.subtitle}</p>
+      </div>
+
+      <div class="content">
+        <div class="media">
+          <div class="media-frame">
+            <img src="${item.image}" alt="${item.title}" loading="lazy" onerror="handleImgError(this)">
+          </div>
+          ${videoHtml}
+        </div>
+        <div class="text">
+          ${item.paragraphs.map(p => `<p>${p}</p>`).join("")}
+        </div>
+      </div>
+
+      <div class="section-counter">
+        <span>${index + 1} van ${items.length}</span>
+        <div class="section-dots" role="tablist" aria-label="Thema navigatie">
+          ${items.map((_, i) => `<button class="dot${i === index ? ' active' : ''}" onclick="openSection(${i})" role="tab" aria-label="Thema ${i + 1}: ${items[i].title}" aria-selected="${i === index}"></button>`).join("")}
+        </div>
+      </div>
+    </section>
+  `;
+});
+
+function updateDots() {
+  document.querySelectorAll(".section-dots").forEach(dots => {
+    dots.querySelectorAll(".dot").forEach((dot, i) => {
+      dot.classList.toggle("active", i === current);
+      dot.setAttribute("aria-selected", i === current);
+    });
+  });
+}
+
+function openSection(index) {
+  current = index;
+  isDetailView = true;
+
+  document.getElementById("home").style.display = "none";
+  homeBtn.classList.add("visible");
+
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.getElementById(`section-${index}`).classList.add("active");
+
+  updateDots();
+  resetIdle();
+}
+
+function showHome() {
+  isDetailView = false;
+
+  document.getElementById("home").style.display = "flex";
+  homeBtn.classList.remove("visible");
+
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+
+  resetIdle();
+}
+
+function nextSection() {
+  if (!isDetailView) return;
+  current = (current + 1) % items.length;
+  openSection(current);
+}
+
+function prevSection() {
+  if (!isDetailView) return;
+  current = (current - 1 + items.length) % items.length;
+  openSection(current);
+}
+
+document.addEventListener("keydown", (e) => {
+  if (!isDetailView) return;
+  if (e.key === "ArrowRight") nextSection();
+  if (e.key === "ArrowLeft") prevSection();
+  if (e.key === "Escape" || e.key === "Home") showHome();
+});
+
+/* ── Kiosk idle timeout: terug naar home na 10 minuten ── */
+let idleTimer;
+
+function resetIdle() {
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(showHome, 600000);
+}
+
+["click", "touchstart", "keydown"].forEach(evt => {
+  document.addEventListener(evt, resetIdle, { passive: true });
+});
+
+resetIdle();
+
+</script>
+
+</body>
+</html>
