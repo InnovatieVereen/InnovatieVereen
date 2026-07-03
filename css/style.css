@@ -1,0 +1,162 @@
+:root{
+    --lichtblauw:#AAE0FA;
+    --violet:#AFB4DA;
+    --groen:#D4E05A;
+    --mint:#B6D8CD;
+    --roze:#E9BCD3;
+    --paars:#55217F;
+    --donkerblauw:#4363AB;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Barlow',sans-serif;
+    background:white;
+    color:#333;
+}
+
+.home-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    width:64px;
+    height:64px;
+    border:none;
+    border-radius:50%;
+    background:var(--paars);
+    color:white;
+    cursor:pointer;
+    z-index:9999;
+    font-size:28px;
+}
+
+.hero{
+    padding:40px;
+    text-align:center;
+}
+
+.hero h1{
+    color:var(--paars);
+    font-size:3rem;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:25px;
+    padding:40px;
+}
+
+.card{
+    height:300px;
+    border-radius:20px;
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.card-title{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding:20px;
+    color:white;
+    background:rgba(85,33,127,.85);
+    font-size:1.5rem;
+    font-weight:600;
+}
+
+.section{
+    display:none;
+    min-height:100vh;
+    padding:50px;
+}
+
+.section.active{
+    display:block;
+}
+
+.section h2{
+    color:var(--paars);
+    font-size:3rem;
+}
+
+.subtitle{
+    margin:10px 0 30px;
+    color:#777;
+    font-size:1.3rem;
+}
+
+.content{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+}
+
+.content img{
+    width:100%;
+    border-radius:16px;
+}
+
+.text{
+    font-size:1.15rem;
+    line-height:1.8;
+}
+
+iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    border:none;
+    margin-top:30px;
+    border-radius:16px;
+}
+
+.nav-arrow{
+    position:fixed;
+    top:50%;
+    transform:translateY(-50%);
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:var(--paars);
+    color:white;
+    font-size:60px;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:999;
+}
+
+.left{
+    left:20px;
+}
+
+.right{
+    right:20px;
+}
+
+@media(max-width:1000px){
+
+    .content{
+        grid-template-columns:1fr;
+    }
+
+}
