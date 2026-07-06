@@ -20,74 +20,105 @@
 
 <body>
 
-    <!-- HOME BUTTON -->
+    <header class="site-header">
+        <img src="images/logo-header.svg" alt="Vereen" class="site-logo">
+    </header>
+
+    <!-- HOME BUTTON (alleen op detailpagina's) -->
     <button class="home-btn" onclick="showHome()" aria-label="Terug naar overzicht">
-        🏠
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
     </button>
 
     <!-- HOMEPAGE -->
     <section id="home">
 
         <div class="hero">
-            <span class="hero-badge">Vereen Innovaties</span>
-            <h1>Zorgtechnologie bij Vereen</h1>
-            <p>Ontdek innovatieve oplossingen die zorgmedewerkers ondersteunen en de kwaliteit van zorg verbeteren.</p>
+            <div class="hero-inner">
+                <p class="hero-label">Innovaties</p>
+                <div class="hero-row">
+                    <h1>Zorgtechnologie bij Vereen</h1>
+                    <p class="hero-text">Ontdek innovatieve oplossingen die zorgmedewerkers ondersteunen en de kwaliteit van zorg verbeteren.</p>
+                </div>
+            </div>
         </div>
 
-        <div class="grid">
+        <div class="grid-section">
+            <h2 class="grid-heading">Kies een thema</h2>
+            <div class="grid">
 
             <div class="card" onclick="openSection(0)">
                 <img src="images/exoskelet.jpg" alt="Exoskelet">
                 <div class="card-overlay"></div>
                 <span class="card-number">1</span>
-                <div class="card-title">Exoskelet</div>
+                <div class="card-title">
+                    <span class="card-title-text">Exoskelet</span>
+                    <span class="card-arrow">›</span>
+                </div>
             </div>
 
             <div class="card" onclick="openSection(1)">
                 <img src="images/Hume.jpg" alt="HUME Sok">
                 <div class="card-overlay"></div>
                 <span class="card-number">2</span>
-                <div class="card-title">HUME Sok</div>
+                <div class="card-title">
+                    <span class="card-title-text">HUME Sok</span>
+                    <span class="card-arrow">›</span>
+                </div>
             </div>
 
             <div class="card" onclick="openSection(2)">
                 <img src="images/Vendlet.jpg" alt="Vendlet Bed">
                 <div class="card-overlay"></div>
                 <span class="card-number">3</span>
-                <div class="card-title">Vendlet Bed</div>
+                <div class="card-title">
+                    <span class="card-title-text">Vendlet Bed</span>
+                    <span class="card-arrow">›</span>
+                </div>
             </div>
 
             <div class="card" onclick="openSection(3)">
                 <img src="images/slimme-WC-bril.jpg" alt="Slimme Toiletbril">
                 <div class="card-overlay"></div>
                 <span class="card-number">4</span>
-                <div class="card-title">Slimme Toiletbril</div>
+                <div class="card-title">
+                    <span class="card-title-text">Slimme Toiletbril</span>
+                    <span class="card-arrow">›</span>
+                </div>
             </div>
 
             <div class="card" onclick="openSection(4)">
                 <img src="images/attendi.jpg" alt="Attendi App">
                 <div class="card-overlay"></div>
                 <span class="card-number">5</span>
-                <div class="card-title">Attendi App</div>
+                <div class="card-title">
+                    <span class="card-title-text">Attendi App</span>
+                    <span class="card-arrow">›</span>
+                </div>
             </div>
 
             <div class="card" onclick="openSection(5)">
                 <img src="images/ontvangstrobot.jpg" alt="Ontvangstrobot">
                 <div class="card-overlay"></div>
                 <span class="card-number">6</span>
-                <div class="card-title">Ontvangstrobot</div>
+                <div class="card-title">
+                    <span class="card-title-text">Ontvangstrobot</span>
+                    <span class="card-arrow">›</span>
+                </div>
             </div>
 
             <div class="card" onclick="openSection(6)">
                 <img src="images/schrobzuigmachine.jpg" alt="Robot Schrob/Zuigmachine">
                 <div class="card-overlay"></div>
                 <span class="card-number">7</span>
-                <div class="card-title">Robot Schrob/Zuigmachine</div>
+                <div class="card-title">
+                    <span class="card-title-text">Robot Schrob/Zuigmachine</span>
+                    <span class="card-arrow">›</span>
+                </div>
             </div>
 
         </div>
 
-        <p class="home-hint">Tik op een thema om meer te ontdekken</p>
+        </div>
 
     </section>
 
