@@ -130,8 +130,7 @@ body {
     text-transform: uppercase;
     color: var(--paars);
     margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 3px solid var(--groen);
+    padding-bottom: 0;
 }
 
 .hero-row {
@@ -158,8 +157,6 @@ body {
     font-size: clamp(0.95rem, 1.5vw, 1.1rem);
     line-height: 1.65;
     font-weight: 400;
-    border-left: 3px solid var(--groen);
-    padding-left: 32px;
 }
 
 /* ── Grid sectie ── */
@@ -277,7 +274,6 @@ body {
     font-size: 0.88rem;
     z-index: 2;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 2px solid rgba(212, 224, 90, 0.6);
 }
 
 .card-title {
@@ -292,7 +288,6 @@ body {
     justify-content: space-between;
     gap: 12px;
     z-index: 2;
-    border-top: 3px solid var(--groen);
     background: linear-gradient(to top, rgba(85, 33, 127, 0.97) 0%, rgba(85, 33, 127, 0.75) 100%);
 }
 
@@ -319,8 +314,7 @@ body {
 }
 
 .card:hover .card-arrow {
-    background: var(--groen);
-    color: var(--paars);
+    background: rgba(255, 255, 255, 0.3);
     transform: translateX(3px);
 }
 
@@ -344,8 +338,7 @@ body {
 
 .section-header {
     margin-bottom: 36px;
-    padding-bottom: 24px;
-    border-bottom: 3px solid var(--groen);
+    padding-bottom: 0;
     max-width: 900px;
 }
 
@@ -499,8 +492,6 @@ iframe {
     }
 
     .hero-text {
-        border-left: none;
-        padding-left: 0;
         max-width: 600px;
     }
 
