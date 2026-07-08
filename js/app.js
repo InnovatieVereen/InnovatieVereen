@@ -90,6 +90,17 @@ let idleTimer;
 const container = document.getElementById("sections");
 const homeBtn = document.querySelector(".home-btn");
 
+function buildKioskVideoSrc(url) {
+    const parsed = new URL(url);
+    parsed.searchParams.set("rel", "0");
+    parsed.searchParams.set("modestbranding", "1");
+    parsed.searchParams.set("iv_load_policy", "3");
+    parsed.searchParams.set("disablekb", "1");
+    parsed.searchParams.set("playsinline", "1");
+    parsed.searchParams.set("fs", "0");
+    return parsed.toString();
+}
+
 // ======================================
 // PAGINA'S GENEREREN
 // ======================================
@@ -102,9 +113,11 @@ items.forEach((item, index) => {
     section.id = item.id;
 
     const videoHtml = item.video
-        ? `<iframe src="${item.video}" title="Video over ${item.title}"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen loading="lazy"></iframe>`
+        ? `<iframe src="${buildKioskVideoSrc(item.video)}" title="Video over ${item.title}"
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                loading="lazy"></iframe>`
         : "";
 
     const paragraphsHtml = item.paragraphs.map(p => `<p>${p}</p>`).join("");
@@ -115,8 +128,8 @@ items.forEach((item, index) => {
         .join("");
 
     section.innerHTML = `
-        <button class="nav-arrow left" onclick="previousSection()" aria-label="Vorige thema">❮</button>
-        <button class="nav-arrow right" onclick="nextSection()" aria-label="Volgende thema">❯</button>
+        <button class="nav-arrow left" onclick="previousSection()" aria-label="Vorige zorgtechnologie">❮</button>
+        <button class="nav-arrow right" onclick="nextSection()" aria-label="Volgende zorgtechnologie">❯</button>
 
         <div class="section-header">
             <h2>${item.title}</h2>
