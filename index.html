@@ -125,6 +125,17 @@
     <!-- DYNAMISCHE PAGINA'S -->
     <div id="sections"></div>
 
+    <div class="video-modal" id="videoModal" aria-hidden="true">
+        <div class="video-modal-backdrop" onclick="closeVideoModal()"></div>
+        <div class="video-modal-panel" role="dialog" aria-modal="true" aria-label="Video fullscreen">
+            <button class="video-modal-close" onclick="closeVideoModal()" aria-label="Sluit video">✕</button>
+            <iframe id="videoModalFrame" title="Video fullscreen"
+                sandbox="allow-scripts allow-same-origin allow-presentation"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="autoplay; encrypted-media; picture-in-picture"></iframe>
+        </div>
+    </div>
+
     <script src="js/app.js"></script>
 
 </body>

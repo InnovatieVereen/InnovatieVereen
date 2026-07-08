@@ -89,8 +89,10 @@ let idleTimer;
 
 const container = document.getElementById("sections");
 const homeBtn = document.querySelector(".home-btn");
+const videoModal = document.getElementById("videoModal");
+const videoModalFrame = document.getElementById("videoModalFrame");
 
-function buildKioskVideoSrc(url) {
+function buildKioskVideoSrc(url, autoplay = false) {
     const parsed = new URL(url);
     parsed.searchParams.set("rel", "0");
     parsed.searchParams.set("modestbranding", "1");
@@ -98,6 +100,7 @@ function buildKioskVideoSrc(url) {
     parsed.searchParams.set("disablekb", "1");
     parsed.searchParams.set("playsinline", "1");
     parsed.searchParams.set("fs", "0");
+    parsed.searchParams.set("autoplay", autoplay ? "1" : "0");
     return parsed.toString();
 }
 
@@ -112,12 +115,30 @@ items.forEach((item, index) => {
     section.classList.add("section");
     section.id = item.id;
 
-    const videoHtml = item.video
+    const inlineVideoHtml = item.video
         ? `<iframe src="${buildKioskVideoSrc(item.video)}" title="Video over ${item.title}"
                 sandbox="allow-scripts allow-same-origin allow-presentation"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allow="autoplay; encrypted-media; picture-in-picture"
                 loading="lazy"></iframe>`
+        : "";
+    const videoBtnHtml = item.video
+        ? `<button class="video-cta" onclick="openVideoModal(${index})" aria-label="Bekijk video van ${item.title}">
+                Bekijk video
+            </button>`
+        : "";
+    const videoShowcaseHtml = item.video
+        ? `<section class="video-showcase">
+                <div class="video-showcase-inner">
+                    <p class="video-showcase-label">Video</p>
+                    <h3>Bekijk ${item.title} in beeld</h3>
+                    <p>Open de video direct fullscreen voor een rustige kijkervaring in de kiosk.</p>
+                    <button class="video-showcase-btn" onclick="openVideoModal(${index})">Bekijk video fullscreen</button>
+                    <div class="video-showcase-frame">
+                        ${inlineVideoHtml}
+                    </div>
+                </div>
+            </section>`
         : "";
 
     const paragraphsHtml = item.paragraphs.map(p => `<p>${p}</p>`).join("");
@@ -142,14 +163,16 @@ items.forEach((item, index) => {
                 <div class="media-frame">
                     <img src="${item.image}" alt="${item.title}" loading="lazy">
                 </div>
-                ${videoHtml}
             </div>
 
             <div class="text">
                 ${paragraphsHtml}
+                ${videoBtnHtml}
             </div>
 
         </div>
+        
+        ${videoShowcaseHtml}
 
         <div class="section-counter">
             <span>${index + 1} van ${items.length}</span>
@@ -171,6 +194,7 @@ const sections = document.querySelectorAll(".section");
 function openSection(index) {
 
     currentIndex = index;
+    closeVideoModal();
 
     document.getElementById("home").style.display = "none";
     homeBtn.classList.add("visible");
@@ -188,6 +212,7 @@ function openSection(index) {
 
 function showHome() {
 
+    closeVideoModal();
     document.getElementById("home").style.display = "flex";
     homeBtn.classList.remove("visible");
 
@@ -216,6 +241,23 @@ function updateDots() {
     });
 }
 
+function openVideoModal(index) {
+    const item = items[index];
+    if (!item || !item.video) return;
+
+    videoModalFrame.src = buildKioskVideoSrc(item.video, true);
+    videoModal.classList.add("is-open");
+    videoModal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+}
+
+function closeVideoModal() {
+    videoModal.classList.remove("is-open");
+    videoModal.setAttribute("aria-hidden", "true");
+    videoModalFrame.src = "";
+    document.body.classList.remove("modal-open");
+}
+
 // ======================================
 // HASH SUPPORT (directe link naar thema)
 // ======================================
@@ -240,6 +282,10 @@ window.addEventListener("load", loadHash);
 // ======================================
 
 document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && videoModal.classList.contains("is-open")) {
+        closeVideoModal();
+        return;
+    }
 
     const detailOpen = document.querySelector(".section.active");
 

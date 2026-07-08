@@ -39,6 +39,10 @@ body {
     user-select: none;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
 /* ── Header met logo (Vereen-stijl) ── */
 .site-header {
     position: fixed;
@@ -413,6 +417,139 @@ iframe {
     margin-bottom: 0;
 }
 
+.video-cta {
+    margin-top: 20px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(120deg, var(--paars) 0%, #6f3aa1 100%);
+    color: var(--wit);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 24px;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(85, 33, 127, 0.24);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.video-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 26px rgba(85, 33, 127, 0.3);
+}
+
+.video-showcase {
+    margin-top: 44px;
+    background: linear-gradient(145deg, #efecf7 0%, #e7eff6 100%);
+    border-radius: var(--radius-groot);
+    border: 1px solid rgba(85, 33, 127, 0.08);
+    padding: 34px 28px;
+}
+
+.video-showcase-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.video-showcase-label {
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--paars);
+    margin-bottom: 10px;
+}
+
+.video-showcase h3 {
+    color: var(--paars);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-bottom: 10px;
+}
+
+.video-showcase p {
+    color: var(--tekst-licht);
+    font-size: 1.02rem;
+    margin-bottom: 20px;
+}
+
+.video-showcase-btn {
+    border: none;
+    border-radius: 999px;
+    background: var(--wit);
+    color: var(--paars);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 22px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(85, 33, 127, 0.12);
+    transition: transform var(--transition), box-shadow var(--transition);
+    margin-bottom: 22px;
+}
+
+.video-showcase-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(85, 33, 127, 0.18);
+}
+
+.video-showcase-frame {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.video-showcase-frame iframe {
+    border-radius: 18px;
+}
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.video-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.video-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(16, 10, 24, 0.92);
+}
+
+.video-modal-panel {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 44px;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    color: var(--wit);
+    font-size: 1.35rem;
+    cursor: pointer;
+}
+
+#videoModalFrame {
+    width: min(96vw, 1700px);
+    height: min(88vh, 960px);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    background: #111;
+}
+
 /* ── Counter + dots ── */
 .section-counter {
     margin-top: 48px;
@@ -515,6 +652,11 @@ iframe {
     .section {
         padding: calc(var(--header-hoogte) + 24px) 90px 48px;
     }
+
+    #videoModalFrame {
+        width: min(96vw, 1200px);
+        height: min(80vh, 680px);
+    }
 }
 
 @media (max-width: 700px) {
@@ -552,6 +694,26 @@ iframe {
 
     .section {
         padding: calc(var(--header-hoogte) + 16px) 20px 40px;
+    }
+
+    .video-showcase {
+        margin-top: 30px;
+        padding: 24px 16px;
+    }
+
+    .video-modal-panel {
+        padding: 18px;
+    }
+
+    .video-modal-close {
+        top: 10px;
+        right: 10px;
+    }
+
+    #videoModalFrame {
+        width: 100%;
+        height: min(78vh, 420px);
+        border-radius: 14px;
     }
 
     .nav-arrow {
