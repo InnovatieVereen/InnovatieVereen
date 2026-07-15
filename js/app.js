@@ -81,6 +81,18 @@ const items = [
             "Deze robot schrob/zuigmachine kan schoonmaakmedewerkers ondersteunen bij het schoonmaken van vloeren. De machine reinigt zelfstandig en zorgt voor een constante en efficiënte hygiëne in de gangen van zorglocaties. Dit kan helpen om tijd te besparen, de werkdruk te verlagen en bij te dragen aan een schone leefomgeving voor cliënten en medewerkers.",
             "Bij Vereen is de robot schrob/zuigmachine twee weken lang getest bij de Havezate. Uit deze pilot bleek dat de machine bijdraagt aan schonere wandelgangen, maar dat hij in volle ruimtes zoals het restaurant niet altijd overal goed bij kan. We gaan binnenkort verder met een langere pilot van een jaar om te bepalen of we de machine bij heel Vereen willen gaan inzetten."
         ]
+    },
+    {
+        id: "doucheinbed",
+        title: "Douche-in-bed systeem",
+        subtitle: "Douchen in bed voor bedlegerige cliënten",
+        image: "images/doucheinbed.png",
+        video: "https://www.youtube-nocookie.com/embed/9F4adEJ9lb0",
+        paragraphs: [
+            "Met behulp van het douche-in-bed systeem is het mogelijk om cliënten in bed te douchen. De beleving van douchen in bed is een aangename ervaring voor bedlegerige cliënten. Tijdens het douchen wordt gebruik gemaakt van een waterdichte cover en het water wordt direct afgevoerd via een ingebouwde afvoer.",
+            "Het douche-in-bed systeem kan helpen om tijd te besparen, is ontspannen voor de cliënt en minder belastend voor de cliënt en zorgmedewerker.",
+            "Bij Vereen wordt het douche-in-bed systeem getest op locatie de Esdoorn. We kijken hoe dit kan bijdragen aan het comfort van bewoners en het ontlasten van de medewerkers."
+        ]
     }
 ];
 
@@ -91,6 +103,10 @@ const container = document.getElementById("sections");
 const homeBtn = document.querySelector(".home-btn");
 const videoModal = document.getElementById("videoModal");
 const videoModalFrame = document.getElementById("videoModalFrame");
+
+function isEmbeddableVideo(url) {
+    return /youtube(-nocookie)?\.com/i.test(url);
+}
 
 function buildKioskVideoSrc(url, autoplay = false) {
     const parsed = new URL(url);
@@ -115,7 +131,7 @@ items.forEach((item, index) => {
     section.classList.add("section");
     section.id = item.id;
 
-    const inlineVideoHtml = item.video
+    const inlineVideoHtml = item.video && isEmbeddableVideo(item.video)
         ? `<iframe src="${buildKioskVideoSrc(item.video)}" title="Video over ${item.title}"
                 sandbox="allow-scripts allow-same-origin allow-presentation"
                 referrerpolicy="strict-origin-when-cross-origin"
@@ -123,20 +139,29 @@ items.forEach((item, index) => {
                 loading="lazy"></iframe>`
         : "";
     const videoBtnHtml = item.video
-        ? `<button class="video-cta" onclick="openVideoModal(${index})" aria-label="Bekijk video van ${item.title}">
+        ? `<button class="video-cta" onclick="openVideo(${index})" aria-label="Bekijk video van ${item.title}">
                 Bekijk video
             </button>`
         : "";
     const videoShowcaseHtml = item.video
-        ? `<section class="video-showcase">
+        ? isEmbeddableVideo(item.video)
+            ? `<section class="video-showcase">
                 <div class="video-showcase-inner">
                     <p class="video-showcase-label">Video</p>
                     <h3>Bekijk ${item.title} in beeld</h3>
                     <p>Open de video direct fullscreen voor een rustige kijkervaring in de kiosk.</p>
-                    <button class="video-showcase-btn" onclick="openVideoModal(${index})">Bekijk video fullscreen</button>
+                    <button class="video-showcase-btn" onclick="openVideo(${index})">Bekijk video fullscreen</button>
                     <div class="video-showcase-frame">
                         ${inlineVideoHtml}
                     </div>
+                </div>
+            </section>`
+            : `<section class="video-showcase">
+                <div class="video-showcase-inner">
+                    <p class="video-showcase-label">Video</p>
+                    <h3>Bekijk ${item.title} in beeld</h3>
+                    <p>De video opent in Microsoft Teams.</p>
+                    <button class="video-showcase-btn" onclick="openVideo(${index})">Bekijk video</button>
                 </div>
             </section>`
         : "";
@@ -239,6 +264,17 @@ function updateDots() {
             dot.classList.toggle("active", i === currentIndex);
         });
     });
+}
+
+function openVideo(index) {
+    const item = items[index];
+    if (!item || !item.video) return;
+
+    if (isEmbeddableVideo(item.video)) {
+        openVideoModal(index);
+    } else {
+        window.open(item.video, "_blank", "noopener,noreferrer");
+    }
 }
 
 function openVideoModal(index) {
