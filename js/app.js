@@ -50,13 +50,13 @@ const items = [
     },
     {
         id: "attendi",
-        title: "Attendi App",
+        title: "Spraakgestuurd rapporteren",
         subtitle: "Gesprekken direct omgezet naar rapportages",
         image: "images/attendi.jpg",
         video: "https://www.youtube-nocookie.com/embed/Rl8ZAp67KDA",
         paragraphs: [
-            "De Attendi App maakt automatisch samenvattingen van ieder zorggesprek. Zo besparen zorgprofessionals tijd, geven ze hun volle aandacht aan de cliënt en ontstaat een rijker cliëntdossier. Nadat het gesprek door Attendi is verwerkt in het gewenste template, kunnen zorgmedewerkers de tekst nog aanpassen en aanvullen waar nodig. Daarna wordt de rapportage direct toegevoegd aan het ECD.",
-            "Op dit moment wordt de Attendi app door de behandelaren van Vereen getest. Wanneer deze pilot succesvol is, gaat het innovatieteam onderzoeken of de Attendi app ook ingezet kan worden tijdens andere momenten zoals zorgrondes of intakegesprekken. In het filmpje vertellen buurtzorgmedewerkers over hun ervaringen met de app en hoe de app werkt."
+            "Met spraakgestuurd rapporteren worden automatisch samenvattingen van ieder zorggesprek gemaakt. Zo besparen zorgprofessionals tijd, geven ze hun volle aandacht aan de cliënt en ontstaat een rijker cliëntdossier. Nadat het gesprek is verwerkt in het gewenste template, kunnen zorgmedewerkers de tekst nog aanpassen en aanvullen waar nodig. Daarna wordt de rapportage direct toegevoegd aan het ECD.",
+            "Op dit moment wordt de Attendi app door de behandelaren van Vereen getest. Tijdens de pilot wordt onderzocht of de Attendi app geschikt is om ingezet te worden tijdens gesprekken. Vervolgens zal gekeken worden naar de mogelijkheden om het op andere momenten zoals zorgrondes of intakegesprekken in te zetten. In het filmpje vertellen buurtzorgmedewerkers over hun ervaringen met de app en hoe de app werkt."
         ]
     },
     {
