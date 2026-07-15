@@ -56,7 +56,7 @@ const items = [
         video: "https://www.youtube-nocookie.com/embed/Rl8ZAp67KDA",
         paragraphs: [
             "Met spraakgestuurd rapporteren worden automatisch samenvattingen van ieder zorggesprek gemaakt. Zo besparen zorgprofessionals tijd, geven ze hun volle aandacht aan de cliënt en ontstaat een rijker cliëntdossier. Nadat het gesprek is verwerkt in het gewenste template, kunnen zorgmedewerkers de tekst nog aanpassen en aanvullen waar nodig. Daarna wordt de rapportage direct toegevoegd aan het ECD.",
-            "Op dit moment wordt de Attendi app door de behandelaren van Vereen getest. Tijdens de pilot wordt onderzocht of de Attendi app geschikt is om ingezet te worden tijdens gesprekken. Vervolgens zal gekeken worden naar de mogelijkheden om het op andere momenten zoals zorgrondes of intakegesprekken in te zetten. In het filmpje vertellen buurtzorgmedewerkers over hun ervaringen met de app en hoe de app werkt."
+            "Van mei tm juli 2026 is de Attendi app door de behandelaren van Vereen getest. Tijdens de pilot wordt onderzocht of de Attendi app geschikt is om ingezet te worden tijdens gesprekken. Vervolgens wordt onderzocht hoe het spraakgestuurd rapporteren verder kan worden gebruikt. In het filmpje vertellen buurtzorgmedewerkers over hun ervaringen met de app en hoe de app werkt."
         ]
     },
     {
